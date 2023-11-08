@@ -12,13 +12,14 @@ bool isFileExists(const string& filename) {
     return file.good();
 }
 
+
+
 void createAdminCredentials() {
     string username, password;
     cout << "Set up admin credentials:" << endl;
-    cout << "Username: ";
-    cin >> username;
-    cout << "Password: ";
-    cin >> password;
+
+    cout << "Username: "; cin >> username;
+    cout << "Password: "; cin >> password;
 
     ofstream configFile("config.txt");
     if (configFile.is_open()) {
@@ -26,9 +27,10 @@ void createAdminCredentials() {
         configFile << password << endl;
         configFile.close();
         cout << "Admin credentials set up successfully." << endl;
-    } else {
-        cerr << "Error: Could not create config file." << endl;
     }
+
+    else cerr << "Error: Could not create config file." << endl;
+    
 }
 
 bool authenticateAdmin() {
@@ -57,7 +59,10 @@ bool authenticateAdmin() {
 
 
 class Hotel {
-private:
+
+
+    private:
+
     int roomNo;
     char name[30];
     char address[50];
@@ -65,7 +70,10 @@ private:
     int days;
     float fare;
 
-public:
+
+
+    public:
+    
     void mainMenu();
     void bookRoom();
     void displayCustomerRecord();
@@ -74,7 +82,11 @@ public:
     int checkRoomStatus(int);
     void modifyRecord(int);
     void deleteRecord(int);
+
+
 };
+
+
 
 void Hotel::mainMenu() {
     int choice;
@@ -115,6 +127,7 @@ void Hotel::mainMenu() {
 }
 
 
+
 void Hotel::bookRoom() {
     system("cls");
     int r, flag;
@@ -129,22 +142,23 @@ void Hotel::bookRoom() {
         cout << "\n Sorry..!!! Room is already booked";
     } else {
         roomNo = r;
-        cin.ignore(); // Clear the newline character from the buffer
-        cout << " Name: ";
-        cin.getline(name, 30);
-        cout << " Address: ";
-        cin.getline(address, 50);
-        cout << " Phone No: ";
-        cin.getline(phone, 15);
-        cout << " No of Days to Checkout: ";
-        cin >> days;
-        fare = days * 500; // 500 is the default price per day
+        cin.ignore(); 
+        // Clearing New line Char from buffer
+        cout << " Name: "; cin.getline(name, 30);
+        cout << " Address: "; cin.getline(address, 50);
+        cout << " Phone No: "; cin.getline(phone, 15);
+        cout << " No of Days to Checkout: "; cin >> days;
+
+        fare = days * 500; 
+        // 500 is the default price per day
+
+
         fout.write(reinterpret_cast<char*>(this), sizeof(Hotel));
         cout << "\n Room is booked...!!!";
     }
 
     cout << "\n Press any key to continue.....!!";
-    cin.ignore(); // Clear the newline character from the buffer
+    cin.ignore();
     cin.get();
     fout.close();
 }
@@ -177,7 +191,9 @@ void Hotel::displayCustomerRecord() {
     }
     
     cout << "\n\n Press any key to continue....!!";
-    cin.ignore(); // clearing newline char from buffer
+    cin.ignore();
+    // clearing newline char from buffer
+
     cin.get();
     fin.close();
 }
@@ -208,12 +224,11 @@ void Hotel::editRecord() {
     cout << "\n ---------";
     cout << "\n\n 1. Modify Customer Record";
     cout << "\n 2. Delete Customer Record";
-    cout << "\n Enter your choice: ";
-    cin >> choice;
+    cout << "\n Enter your choice: "; cin >> choice;
 
-    cout << "\n Enter room no: ";
-    cin >> r;
+    cout << "\n Enter room no: "; cin >> r;
 
+    
     switch (choice) {
         case 1:
             modifyRecord(r);
@@ -227,7 +242,7 @@ void Hotel::editRecord() {
     }
 
     cout << "\n Press any key to continue....!!!";
-    cin.ignore(); // Clear the newline character from the buffer
+    cin.ignore();
     cin.get();
 }
 
@@ -236,7 +251,7 @@ int Hotel::checkRoomStatus(int r) {
     int flag = 0;
     while (fin.read(reinterpret_cast<char*>(this), sizeof(Hotel))) {
         if (roomNo == r) {
-            flag = 1; // Room is booked
+            flag = 1; //Room is booked
             break;
         }
     }
@@ -252,7 +267,8 @@ void Hotel::modifyRecord(int r) {
         if (roomNo == r) {
             cout << "\n Enter New Details";
             cout << "\n -----------------";
-            cin.ignore(); // Clear the newline character from the buffer
+            cin.ignore(); 
+            // Clearing newline char from the buffer
             cout << "\n Name: ";
             cin.getline(name, 30);
             cout << " Address: ";
