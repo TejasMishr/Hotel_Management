@@ -1,8 +1,8 @@
 #include <iostream>
-#include <fstream>
-#include <cstring>
-#include <cstdlib>
-#include <iomanip>
+#include <fstream> // input output file stream
+#include <cstring> // string commands strcpy cmp etc
+#include <cstdlib> //memory allocation 
+#include <iomanip> //setprecision output format
 
 using namespace std;
 
